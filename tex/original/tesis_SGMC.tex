@@ -1,0 +1,242 @@
+\documentclass[12pt]{book}
+
+
+\usepackage{alltt}
+\usepackage{graphics}
+\usepackage{amsmath,amsfonts,latexsym,epsfig} 
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+\usepackage[top = 2.5 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{sectsty}
+
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+
+
+% \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
+\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
+\newcommand{\hlslot}[1]{\textit{#1}}%
+\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\pagestyle{fancyplain}
+\parskip=10pt %espacio entre p·rrafos
+\hoffset=0cm%-0.75cm%-20pt %1in +\hoffset
+\voffset=-1cm%-20pt %1in +\voffset
+\marginparwidth=0cm %ancho del margen izq.
+\oddsidemargin= 0.6cm %0.5cm
+\evensidemargin= -0.6cm %-0.41cm
+
+\textheight=23cm %700pt %medida de la p·g 595
+\textwidth=16.5cm %515pt %medida de la p·g 495
+\headheight=12pt \marginparsep=0cm \footskip=36pt \topmargin=0cm
+\headsep=16pt %\marginparpush=0pt
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\pagestyle{fancy}  
+\lhead[\fancyplain{}{\small \rm \thepage}]{\fancyplain{}{\small \sl \rightmark}} 
+\rhead[\fancyplain{} {\small \sl \leftmark}] {\fancyplain{}{\small \rm \thepage}} 
+\lfoot{} \cfoot{} \rfoot{}
+% \lhead[\fancyplain{}{\bfseries \thepage}]{\fancyplain{}{\bfseries \sl \rightmark}} \chead{} 
+% \rhead[\fancyplain{}{\bfseries \sl \leftmark}]{\fancyplain{}{\bfseries \thepage}} 
+
+
+% Color de capítulos
+% \definecolor{MSBlue}{rgb}{.204,.353,.541}
+\definecolor{SGray}{gray}{0.3}
+\definecolor{MSBlue}{rgb}{.104,.253,.441}
+\definecolor{MSLightBlue}{rgb}{.31,.406,.741}
+% \chapterfont{\color{SGray}} 
+% \chapterfont{\color{MSLightBlue}} 
+% \chapterfont{\color{MSBlue}} 
+% \sectionfont{\color{SGray}} 
+
+
+
+\linespread{1.2}
+\setlength{\belowdisplayskip}{1.4pt} \setlength{\belowdisplayshortskip}{1.4pt}
+\setlength{\abovedisplayskip}{1.4pt} \setlength{\abovedisplayshortskip}{1.4pt}
+\setlength{\skip\footins}{.8cm}
+
+\newcommand{\tmt}[1]{\texttt{tratamiento #1}}
+\newcommand{\AOV}{\texttt{ANOVA}}
+\newcommand{\nota}[1]{\textcolor{red}{Nota: \texttt{#1} } } 
+\newcommand{\doe}{\text{diseño de experimentos}}
+\newcommand{\anova}{\text{análisis de varianza}}
+\newcommand{\Hi}[1]{\texttt{H}_{#1} }
+
+\newcommand{\Normal}{\texttt{N}}
+\newcommand{\Unif}{\texttt{U}}
+\newcommand{\chisquared}[1]{\chi_{ \text{\tiny{(#1)}} }^2}
+\newcommand{\tdist}[1]{\textit{t}_{ \text{\tiny{#1}} } }
+\newcommand{\Fdist}[1]{\text{F}_{ \text{\tiny{#1}} } }
+
+\newcommand{\E}{\texttt{E} }
+\newcommand{\cov}{\texttt{COV} }
+\newcommand{\Var}{\texttt{Var} }
+\newcommand{\SST}{ \texttt{SS}_\texttt{T} }
+\newcommand{\SStmt}{ \texttt{SS}_\texttt{NV} }
+\newcommand{\SSe}{ \texttt{SS}_\texttt{E} }
+\newcommand{\strat}[1]{ (n-1) \hat{\sigma}_{#1}^2 }
+\newcommand{\MSe}{ \texttt{MS}_\texttt{E} }
+\newcommand{\MStmt}{ \texttt{MS}_\texttt{NV} }
+\newcommand{\SSm}[1]{ \texttt{SS}_\texttt{#1} }
+\newcommand{\MSm}[1]{ \texttt{MS}_\texttt{#1} }
+\newcommand{\betaw}{ \beta^{ \texttt{\tiny{(LP)}} } }
+\newcommand{\betas}{ \beta^{ \texttt{\tiny{(SP)}} } }
+\newcommand{\derv}{ \;\mathrm{d} }
+
+
+\theoremstyle{plain}
+\newtheorem{teo}{Teorema}
+\theoremstyle{plain}
+\newtheorem{propi}{Propiedad}[teo]
+\theoremstyle{plain}
+\newtheorem{cor}{Corolario}[teo]
+\theoremstyle{definition}
+\newtheorem{defn}{Definición}
+\theoremstyle{definition}
+\newtheorem{ej}{Ejemplo}
+\theoremstyle{definition}
+\newtheorem{prop}{Proposición}
+\theoremstyle{remark}
+\newtheorem{obs}{Observación}
+
+
+\renewcommand{\thepart}{\Roman{part}} 
+
+
+\makeatletter
+ \def\thebibliography#1{\section*{Referencias\@mkboth
+   {Referencias}{Referencias}}\list
+   {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000 \sfcode`\.=1000
+ \relax}
+\makeatother
+
+\newcommand{\blankpage}{
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+}
+
+\title{Análisis de Experimentos Mediante Modelos Jerárquicos}
+\author{\textsc{Sonia Georgina Mendizábal Claustro}}
+
+
+\begin{document}
+
+% \maketitle
+% \input{capitulos/adicional/caratula}
+% \blankpage
+\input{capitulos/adicional/title}
+
+\frontmatter
+\input{capitulos/adicional/ley}
+\blankpage
+\newpage
+\mbox{}
+\input{capitulos/adicional/dedicatoria}
+\blankpage
+\input{capitulos/adicional/agradecimientos}
+
+
+\tableofcontents
+
+\mainmatter
+\include{capitulos/teoria/1_intro}
+% TEORIA
+\include{capitulos/teoria/2_anova}
+\include{capitulos/teoria/3_anova_bayes}
+\include{capitulos/teoria/4_doe_anova}
+% EJEMPLOS
+\include{capitulos/ejemplos/5_Ejemplos}
+% CONCLUSIONES
+\include{capitulos/teoria/5_conclusiones}
+% 
+% % APÉNDICES
+\appendix
+\include{capitulos/apendices/a_notacion}
+\include{capitulos/apendices/b_papel_normal}
+% \include{capitulos/apendices/c_estad_bayes}
+\include{capitulos/apendices/d_posterior_mcmc}
+\include{capitulos/apendices/e_modelos_jags}
+
+
+% BIBLIOGRAFÍA % \nocite{*}
+\backmatter
+\bibliography{Tesis_biblos}
+\bibliographystyle{plain}
+
+\end{document}

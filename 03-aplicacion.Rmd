@@ -1,0 +1,180 @@
+
+# Flujo de trabajo Bayesiano {#aplicacion}
+
+
+Tomando en cuenta lo anterior, se puede diseñar un flujo de trabajo bayesiano que guíe el desarrollo de modelos robustos en aplicaciones prácticas. El flujo de trabajo comienza examinando el diseño experimental y el proceso de medición resultante. Solo una vez que se comprende el proceso de medición, construimos nuestro modelo inicial y estudiamos su desempeño en el contexto de nuestra experiencia estadística y de dominio. Finalmente, podemos analizar el ajuste del modelo en los datos observados, verificando la precisión computacional del ajuste y la adecuación del modelo para capturar las características relevantes del verdadero proceso de generación de datos. 
+
+Aquí, la experiencia en el dominio se refiere a la experiencia de los responsables de recopilar, curar o manipular los datos, así como de las partes interesadas que tomarán decisiones utilizando las inferencias finales o cualquier intermediario que ayude a tomar esas decisiones. La experiencia estadística se refiere a la competencia en modelado probabilístico y computación.
+
+En este trabajo se eligió el tema de la participación electoral en las elecciones presidenciales en México para ejemplificar el flujo de trabajo Bayesiano. 
+
+## Diseño experimental
+
+Antes de empezar a modelar se tiene que considerar el diseño del experimento en el contexto en el que se está trabajando.
+
+### Análisis conceptual
+
+
+El análisis conceptual sirve para obtener información de cómo fueron generadas las observaciones. Se necesita comprender el proceso de medición para poder identificar efectos sistemáticos que influyen en dicho proceso pero que no se conocen con certeza. Este análisis forma la base del modelo.
+
+Ya que el objetivo de este ejemplo es modelar la participación ciudadana en las elecciones presidenciales de 2018 en México, se empezará por describir el contexto que rodea la participación electoral. 
+
+#### Participación Electoral
+
+La participación de los ciudadanos en las elecciones es una parte crucial
+de una democracia, democracia multiparidista en el caso de México. Actualmente no 
+existe un consenso acerca de los niveles de participación ciudadana necesarios para mantener una
+democracia. 
+
+Alrededor del mundo se ha visto que varias democracias han presentado dismunisiones
+en las tasas de participación electoral. Este fenómeno puede deberse a varios factores como: la falta
+de confianza en las instituciones, procesos de globalización, o bien la necesidad de nuevos modelos
+de participación. En el caso particular de América Latina, a la par del crecimiento del 
+índice de desarrollo humano y la consolidación de sistemas democráticos, se ha presentado un crecimiento
+en la participación electoral. Sin embargo, los niveles de participación de México se encuentran
+por debajo del promedio de la región. En 2006, la tasa de participación en México fue de 55%, mientras que en América Latina fue de 66%.
+
+Para las elecciones presidenciales del 2012 en México, se vio una alza en la participación electoral
+de las elecciones presidenciales (63.34%). No obstante, este porcentaje sigue siendo inferior a los niveles registrados en 1994 (77%). El pocentaje de participación para 2018 se mantuvo en el mismo nivel que en 2012 (63%).
+
+La participación ciudadana en la elección del cargo de Presidente de la República Mexicana representó 63.34% de los 79 millones 454 mil 802 de ciudadanos y ciudadanas registrados en la lista nominal.
+
+aquí hay que cambiar a datos de 2018
+
+_Durante la jornada electoral de 2012 se logró instalar 99.98% de las 143 mil 132 casillas aprobadas; no pudieron instalarse dos casillas en los distritos 07 y 09, en las cabeceras Juchitán de Zaragoza y Santa Lucía del Camino, respectivamente, en Oaxaca. En la siguiente figura se puede observar la distribución del número de votos registrados por casilla._
+
+```{r, out.width = "75%", fig.align='center', message = FALSE, echo=FALSE}
+knitr::include_graphics("images/hist_votoscasilla.pdf")
+```
+
+Tomando como referencia los datos de las elecciones presidenciales de 2012, se observa que los niveles de participación electoral más altos corresponden a los estados de Yucatán y Tabasco
+con 77 y 71 por ciento de ciudadanos que acudieron a las urnas, respectivamente.
+Los niveles más bajos pertenecen a los estados de Michoacán, Chihuahua, y Baja
+California con un nivel de votación en torno a 53%. Los demás estados presentan
+un nivel de participación entre 58 y 67 por ciento. En la siguiente gráfica también
+puede hablarse de un patrón por región geográfica. Los estados del Sureste y Centro del país
+tienen un nivel de participación mayor a la mediana nacional en la mayoría de los casos.
+
+```{r, out.width = "75%", fig.align='center', message = FALSE, echo=FALSE}
+knitr::include_graphics("images/boxplots_edo_distrito.pdf")
+```
+
+Seis años después, en la elección de 2018, los estados de Yucatán y Tabasco permanecen en la cima de este indicador, el primero con un nivel de participación de
+75% y el segundo de 71%, es decir, con una diferencia de -2 y 0 puntos porcentuales, respectivamente, en comparación con la elección anterior. No obstante, en
+esta ocasión se acercan a estas proporciones la Ciudad de México y el estado de
+Campeche, en cada uno de estos casos, siete de cada 10 ciudadanos acudieron a
+votar.
+
+En este mismo año (2018) Baja California y Chihuahua continúan como dos de
+los estados con menor participación en el país, pero esta vez se les suman Sonora
+y Guanajuato. Los cuatro en torno a 53%, es decir, una proporción similar a la de
+2012. Los demás estados se encuentran en un rango que va de 56 a 68 por ciento.
+En México, generalmente seis de cada 10 mexicanos emiten su voto.
+
+
+(mapa de la participación)
+
+
+### Definir las observaciones
+
+Una vez que se hizo el análisis conceptual del proceso de medición, se empieza a construir el modelo matemático. Primero se define el espacio en el que las observaciones pueden tomar valores. Para este caso, nuestras observaciones son el número de votos y la lista nominal de cada una de las casillas. El número de votos para una casilla puede tomar valores desde $0$ hasta el total de la lista nominal de ésta. La participación, al ser una proporción, puede tomar valores entre $0$ y $1$. Se buscan distribuciones probabilísticas que cumplan con estas características. La distribución Beta es la principal candidata para modelar proporciones gracias a su versatilidad.
+
+### Identificar estadísticas resumen relevantes
+
+Teniendo definido el espacio de las observaciones, se construyen las estadísticas resumen que contienen la información relevante del diseño experimental. Además, con base en dichas estadísitcas se debe pensar qué comportamientos son razonables o no para el fenómeno que se está estudiando.
+
+Para el caso de la participación electoral se puede utilizar como estadísitca resumen la participación electoral total. Después del análisis conceptual anterior, se puede decir que valores por debajo de 30% y por encima de 90%, serían considerados como compartamientos no razonables.
+
+## Modelo
+
+Con el diseño experimental definido, se puede empezar a construir un modelo. Es importante que le modelo tenga definido los siguientes puntos:
+
+
+tengo que profundizar en estos puntos...
+
+  - Consistencia con la experiencia en el dominio de estudio
+  - Cómo se espera que se comporten las inferencias sobre las realizaciones del proceso de medición
+  - Capturar la estructura del proceso generador de los datos
+  
+
+### Construir un modelo
+
+Como ya se sabe, un modelo bayesiano necesita un modelo de las observaciones $\pi_s(y|\theta)$, compuesto por el posible proceso generador de los datos y un modelo a priori $\pi_s(\theta)$ que resume la experiencia en el dominio de estudio.
+
+La idea dentro de este flujo de trabajo bayesiano es que el modelo inicial debe de ser lo más sencillo posible. El modelo debe de ser suficiente para contestar la pregunta de interés, en este ejemplo sería: ¿Cuál es el nivel de participación a nivel nacional?
+
+#### Construir un modelo de las observaciones
+
+El modelo observacional se construye a partir de distribuciones de probabilidad sobre el espacio de observaciones. La colección de distribuciones que definene el proceso generador de los datos debe de ser coherente con lo que se sabe del dominio de estudio. Este modelo es tan solo una aproximación al verdadero proceso de medición, sin embargo, incluso aproximaciones simples pueden ofrecer respuesta a preguntas que surgen en la práctica.
+
+En este ejemplo, la distribución de los votos de cada casilla puede pensarse como una distribución Binomial, ya que una de las interpretaciones de esta distribución es la probabilidad de éxito o fracaso en un experimento que es repetido varias veces. Hablando sobre participación electoral, el éxito sería que un elector ejerza su voto. Los parámetros de la distribución Binomial son $n$ y $p$, donde $n$ sería la lista nominal de una casilla y $p$, la probabilidad de que alguien vote dentro de dicha casilla.
+
+#### Completar el modelo con distibuciones previas
+
+En un modelo bayesiano, el modelo observacional se complementa con una distribución previa sobre el espacio de parámetros $\pi_s(\theta)$. El objetivo de la distribución previa no es que contenga toda la información que se tiene sobre el dominio de estudio, simplemente se espera que el modelo conjunto se comporte adecuadamente...
+
+poner aquí a qué se refiere que se comporte adecuadamente...
+
+En la práctica, es suficiente con que la distribución previa contenga información sobre la escala, unidades u órden de magnitud sobre los parámetros. De lo que se trata es de complementar la información del modelo observacional.
+
+Como se mencionó anteriormente, trabajando con la particiación electoral, un buen candidato para el parámetro $p$ de la distribución Binomial sería la distribución Beta. Se habló de que, históricamente, no se han observado niveles de participación eletoral nacional por debajo del 30% y por arriba del 90%. Por lo tanto puede tomarse como previa para la participación nacional una distribución Beta(6,6) que queda centrada en 0.5, es decir, 50% de participación. La distribución previa se vería como se ilustra a continuación: 
+
+```{r, out.width = "60%", fig.align='center', message = FALSE, echo=FALSE}
+knitr::include_graphics("images/beta_previa.pdf")
+```
+
+Entonces, se tiene un primer modelo para la participación definido por:
+
+  * Distribución previa Beta con parámetros de localización y escala iguales a 6 para el nivel de participación nacional ($p_{nac}$) 
+  * La participación de un estrato ($p_{est_i}$) se distribuye Beta con media $p_nac$ y cierto parámetro de dispersión $\phi$
+  * La participación en cada casilla $p_j$ se distribuye Beta con media $p_{est_{i(j)}}$ y cierto parámetro de dispersión $\phi_i$
+
+
+## Identifcar nuevas estadísticas resumen
+
+
+## Analizar el ensamble
+
+Incluso antes de que se utilicen los datos observados, se tiene que considerar cuáles son los resutados de los supuestos del modelo. 
+
+Este análisis se puede realizar con muestras de las configuraciones del modelo y observaciones de la distribución conjunta $\pi_s(y|\theta)$. Normalmente, primero se simulan configuraciones del modelo de la distribución previa y después del proceso generador de los datos.
+
+Para este caso se van a considerar $R = 1000$ realizaciones de la distribución conjunta, cada una simula los valores observados para las $N = $ casillas.
+
+### Analizar la distribución Previa Predictiva
+
+Cada observación simulada del ensamble da un histograma resumen. Si la distribución previa predictiva indica conflicto entre el conocimiento del dominio y el modelo, se tiene que incorporar más información para delimitar de una mejor manera la distribución previa.
+
+
+### Evaluar el ajuste simulado
+
+Además, para cada observación simulada se puede construir una distribución posterior $\pi_s(y|\theta)$. En particular, la distribución construida de las posteriores permite evaluar la exactitud del método computacional.
+
+Dependiendo del método computacional que se utilice existen distintos diagnósticos. Por ejemplo, para métodos de cadenas de Markov Monte Carlo existe la $\hat{R}$.
+
+En este ejemplo se usarán como diagnósticos del ajuste el rango de calibración basada en simulación, el puntaje $z$ (__z-score__) posterior y el "encogimiento" (__shrinkage__) posterior.
+
+  - *Calibración basada en simulación*: se compara la muestra del ensamble posterior y la muestra previa usando rangos. Para cada observación simulada se generan $R$ muestras de la distribución posterior correspondiente,
+
+$$
+\begin{split}
+\tilde{\theta} \sim \pi_s(\theta) \\
+\tilde{y} \sim \pi_s(y|\tilde{\theta}) \\
+(\tilde{\theta}'_1, ..., \tilde{\theta}'_R) \sim \pi(\theta | \tilde{y}),
+\end{split}
+$$
+
+y calcular el rango de la muestra previa dentro de las muestras posteriores, es decir, el número de muestras posteriores mayores a la muestra previa,
+
+$$
+\rho = \# \{\tilde{\theta} < \tilde{\theta}'_r\}.
+$$
+
+si el ensamble posterior y la muestra previa son equivalentes, entonces los rangos deben de distribuirse de manera uniforme.
+
+
+## Ajustar las observaciones y evaluar
+
+Una vez que se hicieron los diagnósticos del modelo, se puede construir una distribución posterior con los datos observados. 
+
+## Analizar la distribución predictiva posterior

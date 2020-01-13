@@ -1,0 +1,66 @@
+
+# Notas
+
+
+
+
+## Metodología SAE {-}
+
+Definición de los principales indicadores de violencia en la calle. Estimación de áreas pequeñas usando tecnicas *model-assisted* y *model-based*. 
+
+Pratesi y Salvati [@poverty-sae, Capítulo 1] dicen, la estimación de indicadores a un nivel local se calcula con metodos indirectos usando variables auxiliares, usualmente proveniente de datos disponibles a nivel local. 
+
+> Considering Särndal *et al.* 1992 we clarify that in this context a model consists of "some assumptions of relationship, unverifiable but not entirely out of place, to save survey resources or to bypass other practical difficulties"
+
+Un modelo ayudará a hacer predicciones de observaciones de la población basado en variables auxiliares. La metodología basada en modelos permitirá la construcción de intervalos de estimadores.
+
+Sin embargo existen varios problemas relacionados a los datos para implementar la metodología. El primero es definiciones incoherentes entre fuentes de información. El segundo, la exactitud de los estimadores a distintos niveles de estimación. 
+
+> The keyword is the harmonization of the registers in such a way that information of the registers in such a way that information from different sources and observed data should be consistent and coherent.
+
+
+
+### Métodos basados en modelos {-}
+
+Generalmente esta metodología, según Pratesi y Salvati [@poverty-sae, Capítulo 1], lo más común es usar estimación con modelos lineales mixtos.
+
+La ecuación \ref{eq:gen_mixef} presenta el modelo generalizado. 
+
+\begin{equation} 
+  y_{jd} = \boldsymbol{x}_{jd}^{\boldsymbol{T}}\boldsymbol{\beta} + u_d + e_{jd}
+  \label{eq:gen_mixef}
+\end{equation} 
+
+donde $\boldsymbol{x}_{jd}$ representa el conjunto de variables auxiliares, $u_d$ representa el efecto aleatorio de area y $e_{jd}$ representa el efecto aleatorio individual. 
+
+## Target Parameters
+
+
+
+
+
+## Ejemplos de citas, referencias
+
+
+
+Un ejemplo de cita es [@R-base]. 
+
+
+Otro ejemplo \index{GIT}. Blah blah 
+
+
+Un ejemplo de cita es [@R-base; @R-stringr]. 
+
+
+
+\begin{equation} 
+  \label{eq:binom}
+  f\left(k\right) = \binom{n}{k} p^k\left(1-p\right)^{n-k}
+\end{equation} 
+
+
+You may refer to it using \ref{eq:binom}, e.g., see Equation 
+
+
+
+En la sección \@ref(intro).

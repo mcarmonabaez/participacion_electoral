@@ -1,0 +1,18 @@
+--- 
+bibliography: ["biblios/tesis_datos.bib"]
+output:
+  bookdown::pdf_book:
+    toc: no
+    template: null
+    includes:
+      in_header: tex/preamble.tex
+      before_body: tex/before_body.tex
+      after_body: tex/after_body.tex
+documentclass: book
+classoption: oneside
+fontsize: 12pt
+subparagraph: yes
+link-citations: yes
+biblio-style: apalike
+---
+

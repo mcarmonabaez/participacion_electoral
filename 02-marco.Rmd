@@ -1,0 +1,26 @@
+
+# Inferencia Bayesiana {#marco}
+
+
+Un poco de historia. 
+
+
+
+
+\newpage
+
+## Flujo de trabajo Bayesiano
+
+
+La idea de tener un flujo de trabajo Bayesiano es poder desarrollar modelos robustos para resolver problemas prácticos. 
+
+### Paso 1: Análisis conceptual
+### Paso 2: Definir las observaciones
+### Paso 3: Identificar estadísticas resumen relevantes
+### Paso 4: Construir un modelo
+### Paso 5: Identifcar nuevas estadísticas resumen
+### Paso 6: Analizar el ensamble
+### Paso 7: Ajustar las observaciones
+### Paso 8: Analizar la distribución predictiva posterior
+
+

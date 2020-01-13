@@ -1,0 +1,536 @@
+% L D'Agostino McGowan dissertation preamble
+% Adapted from L Samuels dissertation template
+% Adapted from Qi Liu's template
+
+\input{tex/params}
+
+\usepackage{alltt} % for knitr code output
+\usepackage{etoolbox} % for toggle
+
+%\usepackage[left=1.5in,right=1in,top=1in,bottom=1in]{geometry}
+\usepackage[top = 2.5 cm]{geometry}
+
+\usepackage{nomencl} % for the nomenclature (List of Abbreviations)
+\usepackage{amsmath, amsfonts, amssymb, amsthm}
+\usepackage{amsbsy,bm} 
+
+\usepackage[utf8]{inputenc} % utf8 
+\usepackage[spanish,mexico]{babel}
+
+\usepackage{lmodern} % Latin modern fonts
+\usepackage[T1]{fontenc} % font encodings
+\usepackage{framed} % for knitr code output
+\usepackage{graphicx}
+\usepackage{multirow} % need this for table in Paper 1
+\usepackage[font=singlespacing]{caption}
+\usepackage{setspace}
+\usepackage{titlesec}
+\usepackage[table]{xcolor}
+\usepackage{float}
+\usepackage{colortbl} % allows coloring of individual cells
+\usepackage{natbib}
+\usepackage{mathtools} % allows split fractions
+\usepackage{indentfirst} % Indent first paragraph at beginning of section
+\usepackage{subfig} % This one is required by something else
+\usepackage[titletoc,title]{appendix}
+%\usepackage[tocgraduated]{tocstyle} % This package is still in alpha, but we need it for VU
+\usepackage{array}
+\usepackage{listings} % Typeset source code listings using LATEX
+\usepackage{makeidx}
+\usepackage{booktabs}
+\usepackage[subfigure, titles]{tocloft} % lets us format TOC for VU
+\usepackage[nottoc,notlof,notlot]{tocbibind}
+\usepackage{pdflscape}
+\usepackage{placeins} % for \FloatBarrier
+\hypersetup{
+    bookmarksnumbered=false, % true means bookmarks in left window are numbered
+    bookmarksopen=false,     % true means only level 1 is displayed.
+    colorlinks=true,         % false: boxed links; true: colored links
+    linkcolor=black,          % color of internal links
+    citecolor=black,          
+    urlcolor=black,          
+    pdfstartview=FitH
+}
+\usepackage[]{color}
+\usepackage{fancyhdr}
+
+
+
+\pagestyle{fancy}  
+
+%\fancyhead{}% clear headers
+%\fancyfoot{}% clear footers
+%\renewcommand{\headrulewidth}{0pt}% eliminate horizontal line
+%\fancyfoot[c]{\thepage}
+
+%\lhead[\fancyplain{}{\small \rm \thepage}]{\fancyplain{}{\small \sl \rightmark}} 
+%\rhead[\fancyplain{} {\small \sl \leftmark}] {\fancyplain{}{\small \rm \thepage}} 
+%\lfoot{} \cfoot{} \rfoot{}
+%
+%\linespread{1.3}
+%\setlength{\belowdisplayskip}{1.5pt} \setlength{\belowdisplayshortskip}{1.5pt}
+%\setlength{\abovedisplayskip}{1.5pt} \setlength{\abovedisplayshortskip}{1.5pt}
+%\setlength{\skip\footins}{1cm}
+
+%\urlstyle{same}
+%\bibliographystyle{vandy_dissertation}
+%\setcounter{secnumdepth}{7}
+%\setcounter{tocdepth}{7}
+%\captionsetup{font=footnotesize}
+%\setcitestyle{citesep={;}, aysep={,}}
+
+%\graphicspath{{paper1/figs/}{paper2/figs/}{paper3/figs/}}
+%\DeclareGraphicsExtensions{.pdf,.jpeg,.png,.PNG,.eps,.tiff}
+
+%\textwidth=6in \oddsidemargin=0.5in \topmargin=-0.5in
+%\textheight=9in  % 9in must include page numbers
+%\textfloatsep = 0.4in 
+
+%\addtocontents{toc}{\vspace{0.4in} \protect \hfill Page\endgraf} 
+%\addtocontents{lof}{\vspace{0.2in} \hspace{0.13in} \ Figure \protect \hfill Page\endgraf} 
+%\addtocontents{lot}{\vspace{0.2in} \hspace{0.13in} \ Table \protect\hfill Page\endgraf}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Page style de TESIS LIC %%%%%%%%%%%%%%%%%
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+%\makeatletter
+%\def\maxwidth{ %
+%  \ifdim\Gin@nat@width>\linewidth
+%    \linewidth
+%  \else
+%    \Gin@nat@width
+%  \fi
+%}
+%\makeatother
+
+
+
+%% \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+%\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+%\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+%\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+%\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+%\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+%\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#%1}}%
+%\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+%\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725%}{#1}}%
+%\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}%{#1}}%
+%\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.019607843137254%9}{#1}}%
+%\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+%\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}%}%
+%\newcommand{\hlslot}[1]{\textit{#1}}%
+%\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+%\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+%\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+%\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+%\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+%\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+%\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+%\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+%\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+%\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+%\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+%
+%
+%\usepackage{framed}
+%\makeatletter
+%\newenvironment{kframe}{%
+% \def\at@end@of@kframe{}%
+% \ifinner\ifhmode%
+%  \def\at@end@of@kframe{\end{minipage}}%
+%  \begin{minipage}{\columnwidth}%
+% \fi\fi%
+% \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+% \colorbox{shadecolor}{##1}\hskip-\fboxsep
+%     % There is no \\@totalrightmargin, so:
+%     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+% \MakeFramed {\advance\hsize-\width
+%   \@totalleftmargin\z@ \linewidth\hsize
+%   \@setminipage}}%
+% {\par\unskip\endMakeFramed%
+% \at@end@of@kframe}
+%\makeatother
+%
+%
+%\definecolor{shadecolor}{rgb}{.97, .97, .97}
+%\definecolor{messagecolor}{rgb}{0, 0, 0}
+%\definecolor{warningcolor}{rgb}{1, 0, 1}
+%\definecolor{errorcolor}{rgb}{1, 0, 0}
+%\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+%\pagestyle{fancyplain}
+%\parskip=10pt %espacio entre p·rrafos
+%\hoffset=0cm%-0.75cm%-20pt %1in +\hoffset
+%\voffset=-1cm%-20pt %1in +\voffset
+%\marginparwidth=0cm %ancho del margen izq.
+%\oddsidemargin= 0cm
+%\evensidemargin= -0cm
+
+%\textheight=23cm %700pt %medida de la p·g 595
+%\textwidth=16.5cm %515pt %medida de la p·g 495
+%\headheight=16pt \marginparsep=0cm \footskip=36pt \topmargin=0cm
+%\headsep=16pt %\marginparpush=0pt
+%\addtolength{\headwidth}{\marginparsep}
+%\addtolength{\headwidth}{\marginparwidth}
+%\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+%
+%\pagestyle{fancy}  
+%\lhead[\fancyplain{}{\small \rm \thepage}]{\fancyplain{}{\small \sl \rightmark}} 
+%\rhead[\fancyplain{} {\small \sl \leftmark}] {\fancyplain{}{\small \rm \thepage}} 
+%\lfoot{} \cfoot{} \rfoot{}
+
+% \lhead[\fancyplain{}{\bfseries \thepage}]{\fancyplain{}{\bfseries \sl \rightmark}} \chead{} 
+% \rhead[\fancyplain{}{\bfseries \sl \leftmark}]{\fancyplain{}{\bfseries \thepage}} 
+
+
+% Color de  
+% \usepackage{sectsty}
+% \definecolor{MSBlue}{rgb}{.204,.353,.541}
+% \definecolor{MSLightBlue}{rgb}{.31,.506,.741}
+% \sectionfont{\color{MSBlue}} 
+% \chapterfont{\color{MSBlue}} 
+
+
+
+%\linespread{1.2}
+%\setlength{\belowdisplayskip}{1.4pt} \setlength{\belowdisplayshortskip}{1.4pt}
+%\setlength{\abovedisplayskip}{1.4pt} \setlength{\abovedisplayshortskip}{1.4pt}
+%\setlength{\skip\footins}{.8cm}
+%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Table of contents %%%%%%%%%%%%%%%%%
+%\renewcommand{\contentsname}{TABLE OF CONTENTS}
+%\renewcommand{\cftchapfont}{\normalfont}
+%\renewcommand{\cftchappagefont}{\normalfont}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% List of figures %%%%%%%%%%%%%%%%%%
+%\renewcommand{\listfigurename}{LIST OF FIGURES}
+%\setlength{\cftbeforefigskip}{0.2in}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% List of tables %%%%%%%%%%%%%%%%%%%
+%\renewcommand{\listtablename}{LIST OF TABLES}
+%\setlength{\cftbeforetabskip}{0.2in}
+%
+%%%%%%%%Configure List of Abbreviations%%%%%%%%%%%%
+%\renewcommand{\nompreamble}{\vspace{0.25in}} % code after main title
+%\makenomenclature
+%\renewcommand{\nomname}{LIST OF ABBREVIATIONS}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% Bibliography %%%%%%%%%%%%%%%%%%%%
+\renewcommand{\bibname}{\texorpdfstring{{REFERENCES\vspace{10mm}}}{REFERENCES}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Chapter headings %%%%%%%%%%%%%%%%%%
+\makeatletter
+\def\@makechapterhead#1{
+  {\parindent \z@ \centering
+    \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        % \MakeUppercase{\@chapapp}\space \thechapter
+        \@chapapp\space \thechapter
+        \par\nobreak
+        \vskip 20\p@
+      \fi
+    \fi
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vskip 40\p@
+  }}
+
+\def\@schapter#1{\if@twocolumn
+                   \@topnewpage[\@makeschapterhead{#1}]%
+                 \else
+                   \@makeschapterhead{#1}%
+                   \@afterheading
+                 \fi}
+
+\def\@makeschapterhead#1{
+  {\parindent \z@ \centering
+    \normalfont
+    \interlinepenalty\@M
+    #1\par\nobreak
+    \vskip 10\p@
+  }}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% TOC line spacing %%%%%%%%%%%%%%%%%%
+\newlength{\li}\setlength{\li}{14.48pt}
+\newlength{\di}\setlength{\di}{-3.5mm}
+
+\def\@chapter[#1]#2{\ifnum \c@secnumdepth >\m@ne
+      \refstepcounter{chapter}%
+      \typeout{\@chapapp\space\thechapter.}%
+      \addcontentsline{toc}{chapter}{\numberline{\thechapter}#1}
+         %{\protect\numberline{\thechapter}\uppercase{#1}}%
+      \addtocontents{toc}{\protect\vspace{\li}}%
+  \else
+      %\addcontentsline{toc}{chapter}{\uppercase{#1}}%
+      \addcontentsline{toc}{chapter}{#1}
+      \addtocontents{toc}{\protect\vspace{\li}}%
+  \fi
+  \chaptermark{#1}%
+  \if@twocolumn
+      % \@topnewpage[\@makechapterhead{\MakeUppercase{#2}}]%
+      \@topnewpage[\@makechapterhead{#2}]%
+  \else
+      \@makechapterhead{#2}%
+      % \@makechapterhead{\MakeUppercase{#2}}%
+      \@afterheading
+ \fi}
+
+
+\renewcommand\chapter{\addtocontents{toc}{\protect\addvspace{\li}}%
+  \if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{plain}%
+  \global\@topnum\z@
+  \@afterindentfalse
+  \secdef\@chapter\@schapter}
+
+\newdimen\@bls                              
+\@bls=\baselineskip
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%% Section headings %%%%%%%%%%%%%%%%%%
+\renewcommand\section{ \@startsection {section}{1}{\z@}%
+    %{-2\@bls}%
+    {2\@bls  plus .3\@bls minus .1\@bls}%
+    {0.1\@bls}%
+    {\centering\normalfont}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%% Sub-section headings %%%%%%%%%%%%%%%%
+\renewcommand\subsection{\@startsection {subsection}{2}{\z@}%
+    %{-2\@bls}%
+    {2\@bls  plus .3\@bls minus .1\@bls}%
+    {0.1\@bls}%
+    {\noindent\normalfont}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% Sub-sub-section headings %%%%%%%%%%%%%%
+\renewcommand\subsubsection{\@startsection {subsubsection}{3}{\z@}%
+    %{-1\@bls}%
+    {\@bls plus .2\@bls}%
+    %{-5pt}%
+    {0.1\@bls}%
+    %{\noindent\normalfont\bfseries}}
+    {\noindent\normalfont\itshape}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%% TOC headings %%%%%%%%%%%%%%%%%%%
+\renewcommand{\@cftmaketoctitle}{
+  \chapter*{\contentsname}
+  \addcontentsline{toc}{chapter}{TABLE OF CONTENTS}} 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%% List of figures headings %%%%%%%%%%%%%%
+\renewcommand{\@cftmakeloftitle}{
+  \chapter*{\listfigurename}
+  Figure \hfill Page
+  \addcontentsline{toc}{chapter}{LIST OF FIGURES} } 
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%% List of tables headings %%%%%%%%%%%%%%
+\renewcommand{\@cftmakelottitle}{
+  \chapter*{\listtablename}
+   Table \hfill Page
+   \addcontentsline{toc}{chapter}{LIST OF TABLES} }  
+
+\makeatother
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\setcounter{section}{-1}     
+
+% Define floats here
+\floatstyle{plain}
+\newfloat{Box}{h}{lob}
+\newcommand{\boxedtext}[3]{
+    \begin{Box} \caption{\small{#1}}
+    \hspace{1.cm}
+    \fbox{\begin{minipage}[c]{0.85\linewidth} 
+    
+    \small{#2}
+   
+   \end{minipage}}
+   
+   \label{#3}
+   \end{Box}
+}
+
+\let\mySpacing=\onehalfspacing
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%% FORMATO ANTERIOR %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{alltt}
+\usepackage{graphics}
+\usepackage{amsmath,amsfonts,latexsym,epsfig}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish,mexico]{babel}
+%\usepackage[top = 2.5 cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{amsthm}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage[]{graphicx}
+\usepackage[]{color}
+\usepackage{sectsty}
+
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+
+
+% \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\definecolor{fgcolor}{rgb}{0.2, 0.2, 0.2}
+\newcommand{\hlnumber}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlfunctioncall}[1]{\textcolor[rgb]{0.501960784313725,0,0.329411764705882}{\textbf{#1}}}%
+\newcommand{\hlstring}[1]{\textcolor[rgb]{0.6,0.6,1}{#1}}%
+\newcommand{\hlkeyword}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlargument}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlcomment}[1]{\textcolor[rgb]{0.180392156862745,0.6,0.341176470588235}{#1}}%
+\newcommand{\hlroxygencomment}[1]{\textcolor[rgb]{0.43921568627451,0.47843137254902,0.701960784313725}{#1}}%
+\newcommand{\hlformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hleqformalargs}[1]{\textcolor[rgb]{0.690196078431373,0.250980392156863,0.0196078431372549}{#1}}%
+\newcommand{\hlassignement}[1]{\textcolor[rgb]{0,0,0}{\textbf{#1}}}%
+\newcommand{\hlpackage}[1]{\textcolor[rgb]{0.588235294117647,0.709803921568627,0.145098039215686}{#1}}%
+\newcommand{\hlslot}[1]{\textit{#1}}%
+\newcommand{\hlsymbol}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlprompt}[1]{\textcolor[rgb]{0.2,0.2,0.2}{#1}}%
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+
+
+\pagestyle{fancyplain}
+\parskip=10pt %espacio entre p·rrafos
+\hoffset=0cm%-0.75cm%-20pt %1in +\hoffset
+\voffset=-1cm%-20pt %1in +\voffset
+\marginparwidth=0cm %ancho del margen izq.
+\oddsidemargin= 0.6cm %0.5cm
+\evensidemargin= -0.6cm %-0.41cm
+
+\textheight=23cm %700pt %medida de la p·g 595
+\textwidth=16.5cm %515pt %medida de la p·g 495
+\headheight=15pt \marginparsep=0cm \footskip=35pt \topmargin=0cm
+\headsep=16pt %\marginparpush=0pt
+\addtolength{\headwidth}{\marginparsep}
+\addtolength{\headwidth}{\marginparwidth}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+% leftmark: capitulo (#)
+% rightmark: sección (##)
+% se deja en header siempre capitulo
+\pagestyle{fancy}  
+\lhead[\fancyplain{}{\small \rm \thepage}]{\fancyplain{}{\small \sl \leftmark}} \chead{} 
+\rhead[\fancyplain{} {\small \sl \leftmark}] {\fancyplain{}{\small \rm \thepage}} 
+\lfoot{} \cfoot{} \rfoot{}
+% \lhead[\fancyplain{}{\bfseries \thepage}]{\fancyplain{}{\bfseries \sl \rightmark}} \chead{} 
+% \rhead[\fancyplain{}{\bfseries \sl \leftmark}]{\fancyplain{}{\bfseries \thepage}} 
+
+
+% Color de capítulos
+% \definecolor{MSBlue}{rgb}{.204,.353,.541}
+\definecolor{SGray}{gray}{0.3}
+\definecolor{MSBlue}{rgb}{.104,.253,.441}
+\definecolor{MSLightBlue}{rgb}{.31,.406,.741}
+
+\linespread{1.2}
+\setlength{\belowdisplayskip}{1.4pt} \setlength{\belowdisplayshortskip}{1.4pt}
+\setlength{\abovedisplayskip}{1.4pt} \setlength{\abovedisplayshortskip}{1.4pt}
+\setlength{\skip\footins}{.8cm}
+
+
+\renewcommand{\thepart}{\Roman{part}} 
+
+
+\makeatletter
+ \def\thebibliography#1{\section*{Referencias\@mkboth
+   {Referencias}{Referencias}}\list
+   {[\arabic{enumi}]}{\settowidth\labelwidth{[#1]}\leftmargin\labelwidth
+ \advance\leftmargin\labelsep
+ \usecounter{enumi}}
+ \def\newblock{\hskip .11em plus .33em minus .07em}
+ \sloppy\clubpenalty4000\widowpenalty4000 \sfcode`\.=1000
+ \relax}
+\makeatother
+
+\newcommand{\blankpage}{
+\newpage
+\thispagestyle{empty}
+\mbox{}
+\newpage
+}
+
+% Nuevas cosas %
+
+\usepackage{makeidx}
+\makeindex
