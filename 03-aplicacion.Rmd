@@ -17,7 +17,7 @@ Antes de empezar a modelar se tiene que considerar el diseño del experimento en
 
 El análisis conceptual sirve para obtener información de cómo fueron generadas las observaciones. Se necesita comprender el proceso de medición para poder identificar efectos sistemáticos que influyen en dicho proceso pero que no se conocen con certeza. Este análisis forma la base del modelo.
 
-Ya que el objetivo de este ejemplo es modelar la participación ciudadana en las elecciones presidenciales de 2018 en México, se empezará por describir el contexto que rodea la participación electoral. 
+Ya que el objetivo de este ejemplo es modelar la participación ciudadana en las elecciones presidenciales de 2018 en México utilizando los datos del conteo rápido, se empezará por describir el contexto que rodea la participación electoral, así como la descripción de lo que es el conteo rápido. 
 
 #### Participación Electoral
 
@@ -26,7 +26,7 @@ de una democracia, democracia multiparidista en el caso de México. Actualmente 
 existe un consenso acerca de los niveles de participación ciudadana necesarios para mantener una
 democracia. 
 
-Alrededor del mundo se ha visto que varias democracias han presentado dismunisiones
+Alrededor del mundo se ha visto que varias democracias han presentado disminusiones
 en las tasas de participación electoral. Este fenómeno puede deberse a varios factores como: la falta
 de confianza en las instituciones, procesos de globalización, o bien la necesidad de nuevos modelos
 de participación. En el caso particular de América Latina, a la par del crecimiento del 
@@ -37,17 +37,13 @@ por debajo del promedio de la región. En 2006, la tasa de participación en Mé
 Para las elecciones presidenciales del 2012 en México, se vio una alza en la participación electoral
 de las elecciones presidenciales (63.34%). No obstante, este porcentaje sigue siendo inferior a los niveles registrados en 1994 (77%). El pocentaje de participación para 2018 se mantuvo en el mismo nivel que en 2012 (63%).
 
-La participación ciudadana en la elección del cargo de Presidente de la República Mexicana representó 63.34% de los 79 millones 454 mil 802 de ciudadanos y ciudadanas registrados en la lista nominal.
 
-aquí hay que cambiar a datos de 2018
-
-_Durante la jornada electoral de 2012 se logró instalar 99.98% de las 143 mil 132 casillas aprobadas; no pudieron instalarse dos casillas en los distritos 07 y 09, en las cabeceras Juchitán de Zaragoza y Santa Lucía del Camino, respectivamente, en Oaxaca. En la siguiente figura se puede observar la distribución del número de votos registrados por casilla._
 
 ```{r, out.width = "75%", fig.align='center', message = FALSE, echo=FALSE}
 knitr::include_graphics("images/hist_votoscasilla.pdf")
 ```
 
-Tomando como referencia los datos de las elecciones presidenciales de 2012, se observa que los niveles de participación electoral más altos corresponden a los estados de Yucatán y Tabasco
+Para entender el contexto en el cual ocurrieron las elecciones de 2018, se toma como referencia los datos de las elecciones presidenciales de 2012. Se observa que los niveles de participación electoral más altos corresponden a los estados de Yucatán y Tabasco
 con 77 y 71 por ciento de ciudadanos que acudieron a las urnas, respectivamente.
 Los niveles más bajos pertenecen a los estados de Michoacán, Chihuahua, y Baja
 California con un nivel de votación en torno a 53%. Los demás estados presentan
@@ -59,7 +55,7 @@ tienen un nivel de participación mayor a la mediana nacional en la mayoría de 
 knitr::include_graphics("images/boxplots_edo_distrito.pdf")
 ```
 
-Seis años después, en la elección de 2018, los estados de Yucatán y Tabasco permanecen en la cima de este indicador, el primero con un nivel de participación de
+En la elección de 2018, los estados de Yucatán y Tabasco permanecen en la cima de este indicador, el primero con un nivel de participación de
 75% y el segundo de 71%, es decir, con una diferencia de -2 y 0 puntos porcentuales, respectivamente, en comparación con la elección anterior. No obstante, en
 esta ocasión se acercan a estas proporciones la Ciudad de México y el estado de
 Campeche, en cada uno de estos casos, siete de cada 10 ciudadanos acudieron a
@@ -75,6 +71,13 @@ En México, generalmente seis de cada 10 mexicanos emiten su voto.
 (mapa de la participación)
 
 
+Ahora que se está en el contexto, se definirá lo que es el conteo rápido. El conteo rápido es un procedimiento estadístico para estimar las tendencias de los resultados finales de una elección. Consiste en la selección de una muestra aleatoria estratificada de todas las casillas instaladas el día de la Jornada ELectoral, para con esto estimar el porcentaje de votos para cada uno de los candidatos.
+
+Normalmente, los resultados obtenidos del conteo rápido se hacen públicos utilizando una muestra parcial, ya que la muestra completa tarda en llegar. Se ha observado que rara vez llega la muestra completa, debido a problemas de comunicación en áreas no-urbanas y a condiciones climáticas en ciertas regiones. Dado esto, se sabe que los datos faltantes en la muestra no son aleatorios.
+
+(debería de profundizar mas?)
+
+
 ### Definir las observaciones
 
 Una vez que se hizo el análisis conceptual del proceso de medición, se empieza a construir el modelo matemático. Primero se define el espacio en el que las observaciones pueden tomar valores. Para este caso, nuestras observaciones son el número de votos y la lista nominal de cada una de las casillas. El número de votos para una casilla puede tomar valores desde $0$ hasta el total de la lista nominal de ésta. La participación, al ser una proporción, puede tomar valores entre $0$ y $1$. Se buscan distribuciones probabilísticas que cumplan con estas características. La distribución Beta es la principal candidata para modelar proporciones gracias a su versatilidad.
@@ -87,14 +90,11 @@ Para el caso de la participación electoral se puede utilizar como estadísitca 
 
 ## Modelo
 
-Con el diseño experimental definido, se puede empezar a construir un modelo. Es importante que le modelo tenga definido los siguientes puntos:
+Con el diseño experimental definido, se puede empezar a construir un modelo. Es importante que el modelo tenga definido los siguientes puntos:
 
-
-tengo que profundizar en estos puntos...
-
-  - Consistencia con la experiencia en el dominio de estudio
-  - Cómo se espera que se comporten las inferencias sobre las realizaciones del proceso de medición
-  - Capturar la estructura del proceso generador de los datos
+  - **Consistencia con la experiencia en el dominio de estudio** Para compenzar una función de verosimilitud que no está bien identificada, se necesita una distribución previa que incorpore la suficiente información del dominio para evitar configuraciones extremas del modelo.
+  - **Cómo se espera que se comporten las inferencias sobre las realizaciones del proceso de medición** 
+  - **Captura de la estructura del proceso generador de los datos**
   
 
 ### Construir un modelo
@@ -139,7 +139,7 @@ Incluso antes de que se utilicen los datos observados, se tiene que considerar c
 
 Este análisis se puede realizar con muestras de las configuraciones del modelo y observaciones de la distribución conjunta $\pi_s(y|\theta)$. Normalmente, primero se simulan configuraciones del modelo de la distribución previa y después del proceso generador de los datos.
 
-Para este caso se van a considerar $R = 1000$ realizaciones de la distribución conjunta, cada una simula los valores observados para las $N = $ casillas.
+Para este caso se van a considerar $R = 1000$ realizaciones de la distribución conjunta, cada una simula los valores observados para las $N =$ casillas.
 
 ### Analizar la distribución Previa Predictiva
 
